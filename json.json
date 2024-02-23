@@ -1,0 +1,18 @@
+import json
+
+with open('sample-data.json') as file:
+    data = json.load(file)
+
+header = ["DN", "Description", "Speed", "MTU"]
+
+print("Interface Status")
+print("=" * 80)
+print("{:<60} {:<20} {:<8} {:<6}".format(*header))
+print("-" * 80)
+
+for interface in data["imdata"]:
+    dn = interface["l1PhysIf"]["attributes"]["dn"]
+    description = interface["l1PhysIf"]["attributes"]["descr"]
+    speed = interface["l1PhysIf"]["attributes"]["speed"]
+    mtu = interface["l1PhysIf"]["attributes"]["mtu"]
+    print("{:<60} {:<20} {:<8} {:<6}".format(dn, description, speed, mtu))
