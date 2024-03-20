@@ -1,0 +1,118 @@
+import pygame 
+import sys 
+ 
+width = 400 
+height = 350 
+red = (255, 0, 0) 
+white = (255, 255, 255) 
+radius = 20 
+global x 
+global y 
+clock = pygame.time.Clock() 
+ 
+ 
+def game(): 
+    x = width // 2 
+    y = height // 2 
+    pygame.init() 
+    screen = pygame.display.set_mode((width, height)) 
+    while True: 
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT: 
+                sys.exit() 
+ 
+        keys = pygame.key.get_pressed() 
+        if keys[pygame.K_LEFT] and x > radius: 
+            x -= 20 
+        if keys[pygame.K_RIGHT] and x < width - radius: 
+            x += 20 
+        if keys[pygame.K_UP] and y - radius > 0: 
+            y -= 20 
+        if keys[pygame.K_DOWN] and y < height - radius: 
+            y += 20 
+        screen.fill(white) 
+        pygame.draw.circle(screen, red, (x, y), radius) 
+        pygame.display.flip() 
+        clock.tick(60) 
+ 
+ 
+pygame.quit() 
+game()
+
+
+import pygame 
+import time 
+import sys 
+pygame.init() 
+ 
+size = (800, 600) 
+screen = pygame.display.set_mode(size) 
+back = pygame.image.load("mainclock.png") 
+seconds = pygame.image.load("leftarm.png") 
+minutes = pygame.image.load("rightarm.png") 
+ 
+done = True 
+while done: 
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT: 
+            done = False 
+ 
+    screen.blit(back, (0, 0)) 
+ 
+    now = time.localtime() 
+ 
+    minute_angle = 360 - (now.tm_min * 6) 
+    min_rotate = pygame.transform.rotate(minutes, minute_angle) 
+    min_pos = ((size[0] - min_rotate.get_width()) / 2, 
+               (size[1] - min_rotate.get_height()) / 2) 
+    screen.blit(min_rotate, min_pos) 
+ 
+    second_angle = 360 - (now.tm_sec * 6) 
+    sec_rotate = pygame.transform.rotate(seconds, second_angle) 
+    sec_pos = ((size[0] - sec_rotate.get_width()) / 2, 
+               (size[1] - sec_rotate.get_height()) / 2) 
+    screen.blit(sec_rotate, sec_pos) 
+ 
+    pygame.display.flip() 
+ 
+pygame.quit() 
+sys.exit()
+
+
+import pygame 
+import time 
+import sys 
+pygame.init() 
+ 
+size = (800, 600) 
+screen = pygame.display.set_mode(size) 
+back = pygame.image.load("mainclock.png") 
+seconds = pygame.image.load("leftarm.png") 
+minutes = pygame.image.load("rightarm.png") 
+ 
+done = True 
+while done: 
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT: 
+            done = False 
+ 
+    screen.blit(back, (0, 0)) 
+ 
+    now = time.localtime() 
+ 
+    minute_angle = 360 - (now.tm_min * 6) 
+    min_rotate = pygame.transform.rotate(minutes, minute_angle) 
+    min_pos = ((size[0] - min_rotate.get_width()) / 2, 
+               (size[1] - min_rotate.get_height()) / 2) 
+    screen.blit(min_rotate, min_pos) 
+ 
+    second_angle = 360 - (now.tm_sec * 6) 
+    sec_rotate = pygame.transform.rotate(seconds, second_angle) 
+    sec_pos = ((size[0] - sec_rotate.get_width()) / 2, 
+               (size[1] - sec_rotate.get_height()) / 2) 
+    screen.blit(sec_rotate, sec_pos) 
+ 
+    pygame.display.flip() 
+ 
+pygame.quit() 
+sys.exit()
